@@ -1,0 +1,22 @@
+%lab rapido
+clear all
+clc
+filas=input('introduzca tamaño de la matriz '); %creo matriz de n posicion
+matriz=randn(filas,1); %lo lleno en random
+[b,c]=size(matriz);
+matriz(4)=100;
+q3=quantile(matriz,0.75);
+q2=quantile(matriz,0.5);
+q1=quantile(matriz,0.25);
+
+l1=q3+((q3-q1)*1.5);
+l2=q1-(q3-q1)*1.5;
+
+for i = 1:b-1
+    
+
+   if(matriz(i)>l1)||(matriz(i)<l2);
+       disp(matriz(i));
+   
+   end
+end
