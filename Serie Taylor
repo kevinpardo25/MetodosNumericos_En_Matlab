@@ -1,0 +1,24 @@
+%serie de taylor :)
+clear all
+
+clc
+
+
+ts=0.005
+
+x=0:0.005:2;
+
+ceros=zeros(1,length(x));
+
+funcion=cos(x+2/3)
+
+plot(x, funcion)
+
+
+for i=2:length(x)
+
+    ceros(i)=(funcion(i)-funcion(i-1))/ts;
+
+end
+
+fprintf('Derivada numerica=%f\n', ceros)
