@@ -1,0 +1,19 @@
+A=[5,9,7;2,3,13;5,6,2]; %matriz por fila
+b=[3;89;10];%matriz por columna (donde va el resultado de cada fila)
+Ab=[A b] %se une las matrices
+n=length(b); %con esto sabemos la cantidad de variables a cambiar es decir numero de filas
+for k=1:n-1 %recorro la matriz
+    [mayor,j]=max(abs(Ab(k:n,k))); %mira cual es el mayor de cada columna 
+    fila=j+k-1; %asigna en la variable fila el indice del mayor
+    if fila~=k % mira si el de abajo es mayor si si la cambia
+        fprintf('intercambio fila %i por fila %i\n',k,fila);
+        Ab([k,fila],:)=Ab([fila,k],:);%intercambio de filas
+        Ab %imprime la matriz intercambiada la fila
+    end
+    %convierte en matriz triangular
+    for i=k+1:n 
+        factor=Ab(i,k)/Ab(k,k); % se divide el mayor por el menor
+        Ab(i,k:n+1)=Ab(i,k:n+1)-factor*Ab(k,k:n+1);  %se hace operaciones y le da valor a la ultima fila        
+    end
+    Ab %muestra la matriz
+end
