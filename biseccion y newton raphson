@@ -1,0 +1,53 @@
+%metodo biseccion
+clear all
+format short;
+a=input('Introduzca el valor de a: ');
+b=input('Introduzca el valor de b: ');
+cont=input('Introduzca el número de iteraciones cont: ');
+fun=input('Introduzcal a funcion f(x)=','s');
+f=inline(fun); %como se repite la funcion para no ser redundante
+for k=1:cont  %ciclo que recorre hasta la cantidad de iteraciones
+    c=(a+b)/2; %calcula promedio
+    e=abs((b-a)/2); %saca el valor absoluto 
+    A(k,:)=[k a b c f(c) e]; %creo un vector para imprimirlo luego
+    if f(a)*f(c)<0
+        b=c; %reemplaza el valor de c por b
+    else
+        a=c; %reemplaza el valor de c por a
+    end
+end
+%imprime todo de forma ordenada:
+fprintf('\n \tk \ta \tb \tc \tf(c) \terror \n')
+disp(A)
+fprintf('Solución:\n c=%8.5f\n',c)
+fprintf('f(c)=%8.5f\n',f(c))
+fprintf('error=%8.5f\n',e)
+
+
+
+--------//-----------------///---------------------------//-------------
+
+
+
+
+%METODO DE NEWTON RAPHSON
+clear all, clc
+disp('Datos de entrada')
+f  = input('Función              :','s');
+x0 = input('Aproximación inicial :');
+tol= input('Tolerancia           :');
+disp('Datos de salida')
+df = input('Diferencial de f              :','s');;
+f  = inline(char(f));
+df = inline(df);
+x  = x0;
+e  = abs(f(x)); %valor absoluto de la funcion
+i  = 0;
+
+while (e>=tol) %siempre que sea mayor a la tolerancia  repita el proceso
+    fprintf('%d\t%f\t%f\n',i,x,f(x))
+    nwr = x - (f(x)/df(x)); % se aplica la formula de x-funcion/diferencial funcion
+    e  = abs(f(x));
+    x  = nwr; %x toma el valor de la formula de newton
+    i  = i+1; %se incrementa el intervalo
+end
